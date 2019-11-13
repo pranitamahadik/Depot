@@ -1,9 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Products</h1>
+<h1>Product Listing</h1>
 
-<table>
-  <thead>
+<table cellpadding="5" cellspacing="0"  >
+
+<%
+odd_or_even = 0
+for product in @products
+odd_or_even = 1 - odd_or_even
+%>
+<tr valign="top" class="ListLine<%= odd_or_even %>">
+<td>
+<img width="60" height="70" src="<%= product.image_url %>"/>
+</td>
+<td width="60%">
+<span class="ListTitle"><%= h(product.title) %></span><br />
+<%= h(truncate(product.description, :length => 80)) %>
+</td>
+<td align="right">
+<%= product.date.strftime("%y-%m-%d") %><br/>
+<strong>$<%= sprintf("%0.2f", product.price) %></strong>
+</td>
+<td class="ListActions">
+<%= link_to 'Show', :action => 'show', :id => product %><br/>
+<%= link_to 'Edit', :action => 'edit', :id => product %><br/>
+<%= link_to 'Destroy', { :action => 'destroy', :id => product },
+:confirm => "Are you sure?" %>
+</td>
+</tr>
+<% end %>
+</table>
+<!--   <thead>
     <tr>
       <th>Title</th>
       <th>Description</th>
@@ -27,9 +54,9 @@
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+  </tbody> -->
+<!-- </table>
 
-<br>
+<br> -->
 
 <%= link_to 'New Product', new_product_path %>

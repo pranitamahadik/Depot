@@ -1,0 +1,23 @@
+<table cellpadding="5" cellspacing="0">
+<% for product in @products %>
+<tr class="catalogentry" valign="top">
+<td>
+<img src="<%= product.image_url %>"/>
+</td>
+<td width="450">
+<h3><%=h product.title %></h3>
+<small>
+<%= product.description %>
+</small>
+<br/>
+<span class="catalogprice"><%= sprintf("$%0.2f", product.price) %></span>
+<%= link_to 'Add to Cart',
+{:action => 'add_to_cart', :id => product },
+:class => 'addtocart' %><br/>
+<br/>
+</td>
+</tr>
+<tr><td class="separator" colspan="2">&nbsp;</td></tr>
+<% end %>
+</table>
+<%= link_to "Show my cart", :action => "display_cart" %>
